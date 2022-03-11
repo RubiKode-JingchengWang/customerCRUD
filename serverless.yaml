@@ -1,0 +1,62 @@
+service: Rubikode-customerCRUD
+provider:
+  name: aws
+  runtime: nodejs14.x
+  timeout: 900
+  lambdaHashingVersion: 20201221
+  region: us-east-1
+  iam: {}
+plugins:
+  - serverless-plugin-common-excludes
+  - serverless-plugin-include-dependencies
+package:
+  excludeDevDependencies: false
+  individually: true
+  exclude:
+    - node_modules/**
+functions:
+  accounts:
+    handler: src/handlers/accounts.handler
+    events:
+      - http:
+          path: accounts
+          method: get
+    environment:
+      NODE_ENV: development
+      NODE_PATH: ./
+  account:
+    handler: src/handlers/account.handler
+    events:
+      - http:
+          path: account
+          method: get
+    environment:
+      NODE_ENV: development
+      NODE_PATH: ./
+  addAccount:
+    handler: src/handlers/addAccount.handler
+    events:
+      - http:
+          path: addAccount
+          method: post
+    environment:
+      NODE_ENV: development
+      NODE_PATH: ./
+  updateUser:
+    handler: src/handlers/updateUser.handler
+    events:
+      - http:
+          path: updateUser
+          method: put
+    environment:
+      NODE_ENV: development
+      NODE_PATH: ./
+  deleteCustomer:
+    handler: src/handlers/deleteCustomer.handler
+    events:
+      - http:
+          path: deleteCustomer
+          method: delete
+    environment:
+      NODE_ENV: development
+      NODE_PATH: ./
